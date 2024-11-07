@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { logout } from '../../store/reducers/userSlice';
@@ -17,7 +17,7 @@ const Header = () => {
     setDropdownOpen(!dropdownOpen);
   };
 
-  const handleLogout = async() => {
+  const handleLogout = async () => {
     showSpinner();
     console.log('User logged out');
     localStorage.removeItem('authToken');
@@ -27,31 +27,27 @@ const Header = () => {
     navigate('/');
   };
 
-  // Debounced function for searching recipes
-  const debouncedSearch = useCallback(
-    debounce((term) => {
-      if (term) {
-        dispatch(fetchRecipes({ search: term })); // Dispatch the search action
-      } else {
-        dispatch(fetchRecipes()); // Fetch all recipes if no term
-      }
-    }, 1000), 
-    [dispatch]
-  );
+  // Move the debounce function outside of `useCallback`
+  const debouncedSearch = debounce((term) => {
+    if (term) {
+      dispatch(fetchRecipes({ search: term }));
+    } else {
+      dispatch(fetchRecipes());
+    }
+  }, 1000);
+
+  // Run the debounced search whenever searchTerm changes
+  useEffect(() => {
+    debouncedSearch(searchTerm);
+    // Cleanup debounce when the component unmounts
+    return () => debouncedSearch.cancel();
+  }, [searchTerm,debouncedSearch]); // Only depends on `searchTerm`
 
   // Handle changes in the search input
   const handleChange = (e) => {
     const { value } = e.target;
     setSearchTerm(value);
-    debouncedSearch(value); // Call the debounced function
   };
-
-  // Cleanup function to cancel the debounced call if the component unmounts
-  useEffect(() => {
-    return () => {
-      debouncedSearch.cancel();
-    };
-  }, [debouncedSearch]);
 
   return (
     <header className="bg-cyan-500 shadow">
@@ -80,7 +76,6 @@ const Header = () => {
                 <div className="py-2 px-4 hover:bg-gray-100 cursor-pointer" onClick={handleLogout}>
                   Logout
                 </div>
-                {/* Add more options if needed */}
               </div>
             )}
           </div>

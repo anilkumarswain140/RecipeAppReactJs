@@ -21,7 +21,7 @@ const RecipeGrid = () => {
     } else {
       dispatch(fetchRecipes({ page: currentPage, limit: 10 })); // Fetch all recipes when there's no filter
     }
-  }, [dispatch, filter]);
+  }, [dispatch, filter, currentPage]);
 
   // Function to handle adding a new recipe
   const handleAddRecipe = async (newRecipe) => {

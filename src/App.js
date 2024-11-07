@@ -1,4 +1,4 @@
-import { Route, Router, Routes, useLocation } from 'react-router-dom';
+import { Route, Routes, useLocation } from 'react-router-dom';
 import './App.css';
 import React, { Suspense } from 'react';
 import Header from './components/Header/Header';
@@ -7,7 +7,7 @@ const SignUp = React.lazy(() => import('./pages/Signup/SingUp'));
 const Home = React.lazy(() => import('./pages/Home/Home'));
 const Login = React.lazy(() => import('./pages/Login/LogInForm'));;
 const RecipeDetails = React.lazy(() => import('./pages/RecipeDetailsPage/RecipeDetailsPage'));
-const Spinner = () => <div>Loading...</div>;
+
 
 
 function App() {
