@@ -30,7 +30,10 @@ const RecipeDetails = () => {
                 setError(error.message || "error fetching records");
             }
         }
-        fetchRecipe();
+        if (id) {
+            fetchRecipe();
+        }
+         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [id])
     const user = useSelector((state) => state.user);
     const handleRatingChange = async (recipeId, newRating) => {
