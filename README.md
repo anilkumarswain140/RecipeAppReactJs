@@ -74,6 +74,11 @@ Launches the test runner in interactive watch mode.
 ### Error Handling
 If any error occurs during API calls (such as adding a recipe, rating a recipe, or fetching data), an error message is displayed to the user with feedback on what went wrong.
 
+
+## App is live on this URL  
+
+https://recipe-app-react-9xnnif6qw-anils-projects-9cea7459.vercel.app/
+
 ---
 
 For further information, refer to the [React Documentation](https://reactjs.org/).
