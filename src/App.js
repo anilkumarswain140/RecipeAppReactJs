@@ -16,17 +16,20 @@ function App() {
 
   return (
     <>
-      {!hideHeaderFooter && <Header />}
-        {/* Suspense provides a fallback UI while lazy-loaded components load */}
-        <Suspense fallback={<div>Loading...</div>}>
-          <Routes>
-            <Route path="/" element={<SignUp />} />
-            <Route path="login" element={<Login />} />
-            <Route path="home" element={<Home />} />
-            <Route path="recipedetails/:id" element={<RecipeDetails />} />
-          </Routes>
-        </Suspense>
-      {!hideHeaderFooter && <Footer />}
+      <div className="main-container">
+        {!hideHeaderFooter && <Header />}
+        <div className="content">
+          <Suspense fallback={<div>Loading...</div>}>
+            <Routes>
+              <Route path="/" element={<SignUp />} />
+              <Route path="login" element={<Login />} />
+              <Route path="home" element={<Home />} />
+              <Route path="recipedetails/:id" element={<RecipeDetails />} />
+            </Routes>
+          </Suspense>
+        </div>
+        {!hideHeaderFooter && <Footer />}
+      </div>
     </>
   );
 }

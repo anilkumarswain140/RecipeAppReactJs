@@ -60,7 +60,6 @@ const Login = () => {
         // Proceed with login if no validation errors
         if (Object.keys(newErrors).length === 0) {
             const response = handleUserLogin(formData);
-            console.log(response);
         }
     };
 

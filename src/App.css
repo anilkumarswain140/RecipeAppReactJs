@@ -36,3 +36,22 @@
     transform: rotate(360deg);
   }
 }
+
+/* App.css */
+.main-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Full viewport height */
+}
+
+.content {
+  flex: 1; /* Allows this section to grow and take up space */
+}
+
+/* Footer styling if needed */
+.footer {
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 20px 0;
+}

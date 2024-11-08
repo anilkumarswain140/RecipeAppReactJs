@@ -5,7 +5,7 @@ import { logout } from '../../store/reducers/userSlice';
 import { fetchRecipes } from '../../store/reducers/recipeSlice';
 import { debounce } from 'lodash';
 import { useSpinner } from '../../api/spinnerService';
-
+import './Header.css';
 const Header = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
@@ -41,7 +41,7 @@ const Header = () => {
     debouncedSearch(searchTerm);
     // Cleanup debounce when the component unmounts
     return () => debouncedSearch.cancel();
-  }, [searchTerm,debouncedSearch]); // Only depends on `searchTerm`
+  }, [searchTerm, debouncedSearch]); // Only depends on `searchTerm`
 
   // Handle changes in the search input
   const handleChange = (e) => {
@@ -51,37 +51,44 @@ const Header = () => {
 
   return (
     <header className="bg-cyan-500 shadow">
-      <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
-        <h1 className="text-2xl font-bold text-white"><Link to={'/home'}>Recipe Market</Link></h1>
-
-        <div className="flex items-center space-x-4">
-          <input
-            value={searchTerm}
-            onChange={handleChange}
-            type="text"
-            placeholder="Search..."
-            className="border rounded-lg px-4 py-2 focus:outline-none focus:ring focus:border-blue-300"
-          />
-
-          <div className="relative">
-            <button onClick={toggleDropdown} className="focus:outline-none">
-              <img
-                src="https://e7.pngegg.com/pngimages/178/595/png-clipart-user-profile-computer-icons-login-user-avatars-monochrome-black-thumbnail.png"
-                alt="User"
-                className="w-10 h-10 rounded-full"
-              />
-            </button>
-            {dropdownOpen && (
-              <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-300 rounded-lg shadow-lg z-[1]">
-                <div className="py-2 px-4 hover:bg-gray-100 cursor-pointer" onClick={handleLogout}>
-                  Logout
-                </div>
+    <div className="max-w-7xl mx-auto px-4 py-2 flex flex-col md:flex-row justify-between items-center space-y-3 md:space-y-0">
+      {/* Logo */}
+      <h1 className="text-lg md:text-2xl font-bold text-white">
+        <Link to={'/home'}>Recipe Market</Link>
+      </h1>
+  
+      {/* Search bar and user menu container */}
+      <div className="flex items-center space-x-3 md:space-x-4 w-full md:w-auto">
+        {/* Responsive search bar */}
+        <input
+          value={searchTerm}
+          onChange={handleChange}
+          type="text"
+          placeholder="Search..."
+          className="border rounded-lg px-4 py-1 focus:outline-none focus:ring focus:border-blue-300 w-full md:w-auto"
+        />
+  
+        {/* User menu */}
+        <div className="relative">
+          <button onClick={toggleDropdown} className="focus:outline-none">
+            <img
+              src="https://e7.pngegg.com/pngimages/178/595/png-clipart-user-profile-computer-icons-login-user-avatars-monochrome-black-thumbnail.png"
+              alt="User"
+              className="w-8 h-8 md:w-10 md:h-10 rounded-full"
+            />
+          </button>
+          {dropdownOpen && (
+            <div className="absolute right-0 mt-2 w-32 md:w-48 bg-white border border-gray-300 rounded-lg shadow-lg z-[1]">
+              <div className="py-2 px-4 hover:bg-gray-100 cursor-pointer" onClick={handleLogout}>
+                Logout
               </div>
-            )}
-          </div>
+            </div>
+          )}
         </div>
       </div>
-    </header>
+    </div>
+  </header>
+  
   );
 };
 
