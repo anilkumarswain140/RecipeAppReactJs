@@ -1,3 +1,11 @@
+## [1.0.2](https://github.com/anilkumarswain140/RecipeAppReactJs/compare/v1.0.1...v1.0.2) (2024-11-08)
+
+
+### Bug Fixes
+
+* add fixes for tags roles warning ([f5c183d](https://github.com/anilkumarswain140/RecipeAppReactJs/commit/f5c183df6df2d3bbb929ab4f62b1d427f0fa93c1))
+* add web accesability changes ([38328ea](https://github.com/anilkumarswain140/RecipeAppReactJs/commit/38328ea6091e10438550777a2cb619d5b8d5c5b7))
+
 ## [1.0.1](https://github.com/anilkumarswain140/RecipeAppReactJs/compare/v1.0.0...v1.0.1) (2024-11-07)
 
 
