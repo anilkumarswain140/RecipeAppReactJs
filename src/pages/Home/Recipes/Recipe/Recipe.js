@@ -10,7 +10,6 @@ const RecipeCard = ({ id, title, ingredients, image, rating, authorName, prepara
                     src={image}
                     alt={title}
                     tabindex="0"
-                    role="img"
                     aria-label={`Image of the recipe: ${title}`}
                 />
 

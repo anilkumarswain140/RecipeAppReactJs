@@ -69,7 +69,6 @@ const Login = () => {
             <form
                 className="bg-white p-6 w-full max-w-md mx-auto rounded-md shadow-md"
                 aria-labelledby="login-form"
-                role="form"
                 tabindex="0"
             >
                 <h1
