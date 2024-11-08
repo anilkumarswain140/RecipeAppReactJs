@@ -20,23 +20,11 @@ jobs:
         with:
           node-version: '20.8.1'
 
-      - name: Install dependencies
-        run: npm install
-
-      - name: Run Tests
-        run: npm test
-
-      - name: Build Project
-        run: CI=true npm run build
-
-      - name: Run Release
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: npx semantic-release
-
-      - name: Deploy to Vercel
-        env:
-          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
-        run: |
-          npm install -g vercel
-          vercel --prod --confirm --token $VERCEL_TOKEN --cwd build
+      - name: Install Vercel CLI
+        run: npm install --global vercel@latest
+      - name: Pull Vercel Environment Information
+        run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
+      - name: Build Project Artifacts
+        run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
+      - name: Deploy Project Artifacts to Vercel
+        run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
