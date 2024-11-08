@@ -1,3 +1,10 @@
+## [1.0.3](https://github.com/anilkumarswain140/RecipeAppReactJs/compare/v1.0.2...v1.0.3) (2024-11-08)
+
+
+### Bug Fixes
+
+* add engines config for vercel CI/CD ([eaf0d75](https://github.com/anilkumarswain140/RecipeAppReactJs/commit/eaf0d7570e0dab6c5d196515e89e6a69b6979c33))
+
 ## [1.0.2](https://github.com/anilkumarswain140/RecipeAppReactJs/compare/v1.0.1...v1.0.2) (2024-11-08)
 
 
