@@ -33,7 +33,7 @@ const RecipeDetails = () => {
         if (id) {
             fetchRecipe();
         }
-         // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [id])
     const user = useSelector((state) => state.user);
     const handleRatingChange = async (recipeId, newRating) => {
@@ -66,8 +66,8 @@ const RecipeDetails = () => {
         window.location.reload();
     }
     return (
-        <div className="recipe-details-container" data-testid="recipecontainer">
-            {error && <p className="text-red-500 font-semibold mt-2">{error}</p>}
+        <div className="recipe-details-container" data-testid="recipecontainer" lang="en">
+            {error && <p className="text-red-500 font-semibold mt-2" role="alert">{error}</p>}
             {showToast && <Toast message={toastMessage} onClose={() => setShowToast(false)} />} {/* Show toast if active */}
 
             {/* Recipe Image */}
@@ -75,10 +75,11 @@ const RecipeDetails = () => {
                 <img
                     className="recipe-image"
                     src={recipe?.image}
-                    alt={recipe?.title}
+                    alt={recipe?.title || "Recipe Image"} // Improved alt text for accessibility
+                    aria-describedby="recipe-title"
                 />
                 <div className="recipe-title-info">
-                    <h1>{recipe?.title}</h1>
+                    <h1 id="recipe-title">{recipe?.title}</h1>
                     <p className="author">
                         By <strong>{recipe?.author?.username}</strong>
                     </p>
@@ -91,8 +92,8 @@ const RecipeDetails = () => {
 
             {/* Ingredients */}
             <div className="recipe-section">
-                <h2>Ingredients</h2>
-                <ul className="ingredients-list">
+                <h2 id="ingredients-section">Ingredients</h2>
+                <ul className="ingredients-list" aria-labelledby="ingredients-section">
                     {recipe?.ingredients && recipe?.ingredients?.map((ingredient, index) => (
                         <li key={index}>{ingredient}</li>
                     ))}
@@ -101,8 +102,8 @@ const RecipeDetails = () => {
 
             {/* Preparation Steps */}
             <div className="recipe-section">
-                <h2>Preparation Steps</h2>
-                <ol className="steps-list">
+                <h2 id="preparation-steps-section">Preparation Steps</h2>
+                <ol className="steps-list" aria-labelledby="preparation-steps-section">
                     {recipe?.steps?.map((step, index) => (
                         <li key={index}>{step}</li>
                     ))}
@@ -111,40 +112,58 @@ const RecipeDetails = () => {
 
             {/* Comments & Ratings Section */}
             <div className="recipe-section">
-                <h2>User Ratings</h2>
-                <div className="ratings">
+                <h2 id="ratings-section">User Ratings</h2>
+                <div className="ratings" aria-labelledby="ratings-section">
                     <p><strong>Average Rating:</strong> {recipe?.averageRating} ★</p>
-                    {/* Add a button or form for users to submit ratings */}
                 </div>
             </div>
+
             <h2>Rate this recipe <span>(add your rating)</span></h2>
-            <Rating isEditable={true} onRatingChange={(newRating) => handleRatingChange(recipe._id, newRating)} />
+            <Rating
+                isEditable={true}
+                onRatingChange={(newRating) => handleRatingChange(recipe._id, newRating)}
+                aria-label="Rate this recipe"
+            />
+
             {/* Comments */}
             <div className="recipe-section">
-                <h2>Comments</h2>
-                <div className="comments">
+                <h2 id="comments-section">Comments</h2>
+                <div className="comments" aria-labelledby="comments-section">
                     <textarea
                         value={comment}
                         onChange={handleCommentChange} // Update comment on change
                         placeholder="Write your comment here..."
                         rows={4}
-                        className='comment-box'
+                        className="comment-box"
+                        aria-label="Write your comment"
+                        tabindex="0"
                     />
-                    <button onClick={handleSubmit} className='comment-btn'>Submit</button> {/* Submit button */}
+                    <button
+                        onClick={handleSubmit}
+                        className="comment-btn"
+                        aria-label="Submit your comment"
+                        tabindex="0"
+                    >
+                        Submit
+                    </button>
+
                     {recipe?.comments?.length > 0 ? (
                         recipe?.comments.map((comment, index) => (
                             <div key={index} className="comment">
-                                <small><FontAwesomeIcon icon={faUser} style={{ marginRight: '5px' }} /> - {comment.author.username}</small>
+                                <small>
+                                    <FontAwesomeIcon icon={faUser} style={{ marginRight: '5px' }} />
+                                    - {comment.author.username}
+                                </small>
                                 <p>{comment.content}</p>
                             </div>
                         ))
                     ) : (
                         <p>No comments yet.</p>
                     )}
-                    {/* Add form for submitting comments */}
                 </div>
             </div>
         </div>
+
     );
 };
 

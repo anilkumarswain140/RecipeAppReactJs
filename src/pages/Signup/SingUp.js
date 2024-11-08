@@ -83,8 +83,8 @@ const SignUp = () => {
 
     return (
         <div className="h-screen md:flex">
-            <div
-                className="relative overflow-hidden md:flex w-1/2 bg-gradient-to-tr from-blue-800 to-purple-700 i justify-around items-center hidden">
+            {/* Left Side - Gradient Background */}
+            <div className="relative overflow-hidden md:flex w-1/2 bg-gradient-to-tr from-blue-800 to-purple-700 justify-around items-center hidden">
                 <div>
                     <h1 className="text-white font-bold text-4xl font-sans">Recipe market</h1>
                     <p className="text-white mt-1">Add your innovations and explore more</p>
@@ -95,8 +95,10 @@ const SignUp = () => {
                 <div className="absolute -top-40 -right-0 w-80 h-80 border-4 rounded-full border-opacity-30 border-t-8"></div>
                 <div className="absolute -top-20 -right-20 w-80 h-80 border-4 rounded-full border-opacity-30 border-t-8"></div>
             </div>
+
+            {/* Right Side - Form Container */}
             <div className="flex md:w-1/2 justify-center py-10 items-center bg-white">
-                <form className="bg-white">
+                <form className="bg-white w-full max-w-md px-4">
                     <h1 className="text-gray-800 font-bold text-2xl mb-1">Hello Again!</h1>
                     <p className="text-sm font-normal text-gray-600 mb-7">Welcome Back</p>
 
@@ -143,8 +145,8 @@ const SignUp = () => {
                     </p>
                 </form>
             </div>
-
         </div>
+
     )
 }
 

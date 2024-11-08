@@ -1,13 +1,3 @@
 {
-    "build": {
-      "command": "npm run build",
-      "outputDirectory": "build"
-    },
-    "routes": [
-      {
-        "src": "/(.*)",
-        "dest": "./build/index.html"
-      }
-    ]
-  }
-  
+  "rewrites": [{ "source": "/(.*)", "destination": "/" }]
+}
